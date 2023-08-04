@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import {useState,useEffect} from "react"
+import Header from "./components/Header";
+import Blocks from './components/Blocks';
 import './App.css';
 
+
+
+
 function App() {
+  const [data,setData] = useState(null)
+  const GetData = () =>{
+
+    useEffect(()=>{
+      const getData = async()=>{
+        const starwarsData = await fetch("https://swapi.dev/api/starships/")
+        const rawStarwarsData = await starwarsData.json()
+        setData(rawStarwarsData)
+      }
+      getData()
+    
+    },[])
+}
+
+GetData()
+
+ const validData = data? data: "Loading...."
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Blocks data = {validData}/>
     </div>
   );
 }

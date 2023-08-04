@@ -1,0 +1,5 @@
+.blockContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 100px 75px auto 75px;
+}
